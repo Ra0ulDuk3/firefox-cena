@@ -1,4 +1,5 @@
-
+princess john
+============
 
 ## Requirements
 
@@ -15,51 +16,17 @@ A simple example of a tool would be a user enumeration tool that 1) pings a netw
 - April 28 – In class presentations due
 - May 5 – Final papers and code submitted
 
-## Draft Ideas 
-
-### Speer
-
-#### Dependencies
-- List of target sites
-
-#### Steps
-
-1. Setup
-    - Clone target sites
-    - fabricate DNS entries
-    - initialize collection database
-
-2. Enumerate Networks 
-    - Scan for WPA2 networks  
-
-3. Gain Network Access
-    - deauth clients 
-    - dictionary attack pre-shared key
-
-4. Collect Network Data 
-    - sniff traffic to gather:
-        - clients
-        - total traffic
-        - percent of traffic that is interacting over ports 80 or 443 with targets
-
-5. Present Options (this is where I would have liked for it to be parallelized)
-
-6. Phish
-    - for all targeted sites:
-        - setup webserver that speaks to our database
-        - DNS poison
-        - forward credentials into site once we have sent to our database
-
-
-### Hendrix
-1. Enumerate Networks
-2. Gain Access
+### Steps
+1. Find out access point we want to imitate 
+1. Listen for clients 
+2. DeAuth
+3. Enumerate Networks
+4. Gain Access
     - for all WPA2 networks, deauth 
-4. Detect browser, if firefox and debian-based; 
+5. Detect browser, if firefox and debian-based; 
    - poison dns, point every single site to a 'firefox needs update, cant work' 
-   - user downloads paylod in deb file called firefox_11_2.deb
+   - user downloads payload in deb file called firefox_11_2.deb
    - Instructions for download 
+- 
 - payload: bash script that renames their bashrc to .old.bashrc and puts a new bashrc that remaps every key to an annoying ass operation like opening a firefox window and playing https://www.youtube.com/watch?v=m78e1WBnlsE
 
-Hendrix
-===========================
