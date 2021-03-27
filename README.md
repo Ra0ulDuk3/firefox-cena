@@ -1,4 +1,4 @@
-princess john
+firefox cena
 ============
 
 ## Requirements
@@ -17,16 +17,44 @@ A simple example of a tool would be a user enumeration tool that 1) pings a netw
 - May 5 – Final papers and code submitted
 
 ### Steps
-1. Find out access point we want to imitate 
-1. Listen for clients 
-2. DeAuth
-3. Enumerate Networks
-4. Gain Access
-    - for all WPA2 networks, deauth 
-5. Detect browser, if firefox and debian-based; 
-   - poison dns, point every single site to a 'firefox needs update, cant work' 
-   - user downloads payload in deb file called firefox_11_2.deb
-   - Instructions for download 
-- 
-- payload: bash script that renames their bashrc to .old.bashrc and puts a new bashrc that remaps every key to an annoying ass operation like opening a firefox window and playing https://www.youtube.com/watch?v=m78e1WBnlsE
+1. Find out access point we want to imitate  (airmon-ng)
+2. Imitate the access point  (airebase-ng)
+3. setup dnschef to redirect all traffic to my server (update firefox page),except install instructions page, forward it to my install instructions
+4. Deauth client (aireplay-ng)
+5. Client joins, installs my payload 
+    - payload: bash script that installs dependencies, hides assets, and sets crontabs  
 
+
+
+
+Firefox Cena 
+===============
+
+## Abstract
+
+This tool allows a user to install a set of incredibly obnoxious "John Cena" crontabs on a victim's machine through the execution of an evil-twin rogue access point attack as well as a phishing attack. From a high-level, Firefox Cena allows the user to carry out the following steps:
+1. **Network Enumeration**: Enumerate local wireless networks in order to find a network worth impersonating.
+2. **Network Spoofing**: Execute an 'Evil-Twin' attack, by spoofing the BSSID and ESSID of the target network.
+3. **Traffic Redirection**: Redirect all domains to our evil apache server that contains a malicious 'firefox needs update' site, prompting client to download payload disguised as firefox update
+4. **Deauthentication**: Deauthorize clients of legitimate network so that clients can connect to spoofed network.
+5. **Payload Installation**: Upon execution of update script by client, installs TTS application and image viewer as well as minutely crontab which harasses client by running TTS in background and displaying an excessive amount of images of john cena 
+
+
+
+## Method 
+
+### Network Enumeration
+
+### Network Spoofing
+
+### Traffic Redirection
+
+### Deauthentication
+
+### Payload Installation
+
+## Evaluation 
+
+### Issues 
+
+### Future Improvements
