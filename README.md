@@ -43,12 +43,15 @@ This tool allows a user to install a set of incredibly obnoxious "John Cena" cro
 
 ## Method 
 
-### Hardware Intialization
 
+### Interface Initialization
+
+Firefox Cena takes a single command line argument which dictates the network interface to be used for the procedure.
 
 ### Network Enumeration
 
-The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a 
+The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds.
+
 # TODO: figure out if this is necessary
 
 ### Network Spoofing
