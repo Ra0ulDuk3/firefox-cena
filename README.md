@@ -32,20 +32,29 @@ Firefox Cena
 
 ## Abstract
 
-This tool allows a user to install a set of incredibly obnoxious "John Cena" crontabs on a victim's machine through the execution of an evil-twin rogue access point attack as well as a phishing attack. From a high-level, Firefox Cena allows the user to carry out the following steps:
+This tool allows a user to install a set of incredibly obnoxious "John Cena" crontabs on a victim's machine through the execution of an evil-twin rogue access point attack combined with a phishing attack. From a high-level, Firefox Cena allows the user to carry out the following steps:
 1. **Network Enumeration**: Enumerate local wireless networks in order to find a network worth impersonating.
 2. **Network Spoofing**: Execute an 'Evil-Twin' attack, by spoofing the BSSID and ESSID of the target network.
-3. **Traffic Redirection**: Redirect all domains to our evil apache server that contains a malicious 'firefox needs update' site, prompting client to download payload disguised as firefox update
-4. **Deauthentication**: Deauthorize clients of legitimate network so that clients can connect to spoofed network.
+3. **Traffic Redirection**: Redirect all domains to our evil apache server that contains a malicious 'firefox needs update' site which will prompt clients to download payload disguised as firefox update
+4. **Deauthentication**: Deauthenticate clients of legitimate network so that clients can connect to spoofed network.
 5. **Payload Installation**: Upon execution of update script by client, installs TTS application and image viewer as well as minutely crontab which harasses client by running TTS in background and displaying an excessive amount of images of john cena 
 
 
 
 ## Method 
 
+### Hardware Intialization
+
+
 ### Network Enumeration
 
+The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a 
+# TODO: figure out if this is necessary
+
 ### Network Spoofing
+
+https://www.kalitutorials.net/2014/07/evil-twin-tutorial.html
+
 
 ### Traffic Redirection
 
