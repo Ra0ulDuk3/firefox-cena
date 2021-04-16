@@ -1,0 +1,38 @@
+
+Found 5 processes that could cause trouble.
+Kill them using 'airmon-ng check kill' before putting
+the card in monitor mode, they will interfere by changing channels
+and sometimes putting the interface back in managed mode
+
+  PID Name
+ 1059 avahi-daemon
+ 1064 NetworkManager
+ 1069 wpa_supplicant
+ 1106 avahi-daemon
+28380 dhclient
+
+PHY	Interface	Driver		Chipset
+
+phy0	wlp2s0monmon	iwlwifi		Intel Corporation Wireless 8265 / 8275 (rev 78)
+
+
+Found 6 processes that could cause trouble.
+Kill them using 'airmon-ng check kill' before putting
+the card in monitor mode, they will interfere by changing channels
+and sometimes putting the interface back in managed mode
+
+  PID Name
+ 1059 avahi-daemon
+ 1064 NetworkManager
+ 1069 wpa_supplicant
+ 1106 avahi-daemon
+28380 dhclient
+32657 dhclient
+
+PHY	Interface	Driver		Chipset
+
+phy0	wlp2s0mon	iwlwifi		Intel Corporation Wireless 8265 / 8275 (rev 78)
+
+		(mac80211 monitor mode vif enabled for [phy0]wlp2s0mon on [phy0]wlp2s0monmon)
+		(mac80211 station mode vif disabled for [phy0]wlp2s0mon)
+
