@@ -1,6 +1,17 @@
 import subprocess
 
 
+def monitor_mode(interface):
+    try:
+        cmd = 'airmon-ng start {}'.format(interface)
+        result = subprocess.run(cmd)
+        output = result.stdout
+        # TODO: convert output to string 
+
+        # TODO: parse out and return the monitor mode of the interface
+
+    except:
+        print("Error occured during Interface Initialization")
 
 
 # make sure interface is working 

@@ -43,21 +43,21 @@ This tool allows a user to install a set of incredibly obnoxious "John Cena" cro
 
 ## Method 
 
+https://www.kalitutorials.net/2014/07/evil-twin-tutorial.html
 
 ### Interface Initialization
 
-Firefox Cena takes a single command line argument which dictates the network interface to be used for the procedure.
+Firefox Cena takes a single command line argument which dictates the network interface to be used for the procedure. 
+
+`python3 cant-see-me.py <network-interface>`
+
+In order to allow execution of the evil twin attack and direct all of the victims web traffic to our webserver, the first subroutine executed by FC is setting the network interface to Monitor mode using airmon-ng.
 
 ### Network Enumeration
 
 The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds.
 
-# TODO: figure out if this is necessary
-
 ### Network Spoofing
-
-https://www.kalitutorials.net/2014/07/evil-twin-tutorial.html
-
 
 ### Traffic Redirection
 
