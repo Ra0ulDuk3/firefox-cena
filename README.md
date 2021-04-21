@@ -32,7 +32,8 @@ Firefox Cena
 
 ## Abstract
 
-This tool allows a user to install a set of incredibly obnoxious "John Cena" crontabs on a victim's machine through the execution of an evil-twin rogue access point attack combined with a phishing attack. From a high-level, Firefox Cena allows the user to carry out the following steps:
+This tool allows a user to gain remote code execution with root priviledges through the deployment of an evil-twin rogue access point, DNS poisioning, and phishing attack. Firefox Cena allows the user to carry out the following steps:
+
 1. **Network Enumeration**: Enumerate local wireless networks in order to find a network worth impersonating.
 2. **Network Spoofing**: Execute an 'Evil-Twin' attack, by spoofing the BSSID and ESSID of the target network.
 3. **Traffic Redirection**: Redirect all domains to our evil apache server that contains a malicious 'firefox needs update' site which will prompt clients to download payload disguised as firefox update
@@ -70,3 +71,4 @@ The first phase of Firefox Cena consists of identifying potential networks that 
 ### Issues 
 
 ### Future Improvements
+- would be cool to have silent mode 
