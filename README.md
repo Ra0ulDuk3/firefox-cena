@@ -43,6 +43,9 @@ In order to allow execution of the evil twin attack and direct all of the victim
 
 The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds.
 
+FIXME:add image of output
+![]()
+
 ### Network Spoofing
 
 ### Traffic Redirection
