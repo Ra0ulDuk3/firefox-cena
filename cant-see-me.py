@@ -180,6 +180,7 @@ def clone_network(network, mon_interface, channel=1):
         print(channel)
         print(network)
         print(mon_interface)
+        cmd = "airbase-ng -a {} --essid {} -c {} {}".format(network[0], network[1] channel, mon_interface)
         net_clone_proc =  subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True)
         print("[+] cloned {}!".format(network[1]))
         return net_clone_proc
@@ -255,6 +256,9 @@ def launch_evil_server():
 
 
 def redirect_dns():
+    '''
+    uses sslstrip and ettercap to 
+    '''
     pass
 # setup dnschef
 

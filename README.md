@@ -48,11 +48,20 @@ FIXME:add image of output
 
 ### Network Spoofing
 
-### Traffic Redirection
+Once a user has chosen the network that they would like to clone, FC clones the network using airbase-ng. By default, the network is cloned on channel 1 with the interface provided by the user. This is important to note because unless the user has two network interfaces, they will become disconnected from the internet as their interface will be too busy acting as an access point to provide internet access.
+
 
 ### Deauthentication
 
+In order to ensure that clients actually connect to our rogue access point, FC uses aireplay-ng, a wireless packet injector tool to send deauthenticate packets to clients of the legitimate access point. If a client is in closer proximity to or has a better signal from our rogue access point, they will connect to it instead of connecting to the legitimate access point, providing us with victims to continue executing our attack on.
+
+
+### Traffic Redirection
+
+I
+
 ### Payload Installation
+
 
 ## Evaluation 
 
