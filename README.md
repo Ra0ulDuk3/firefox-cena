@@ -5,7 +5,9 @@ firefox cena
     <img src="./firefox_update/assets/.cena.jpg" />
 </p>
 
-This tool allows a user to gain remote code execution with root priviledges through the deployment of an evil-twin rogue access point, DNS poisioning, and a phishing attack. Firefox Cena allows the user to carry out the following steps:
+This tool allows a user to install a Monero crypto-miner and gain RCE with root priviledges through the deployment of an automated multi-stage social-engineering attack that includes the creation of an evil-twin rogue access point, DNS poisioning, Wireless Deauthentication, and Site Cloning.
+
+Firefox Cena allows the attacker to automatically carry out the following steps:
 
 1. **Interface Initialization**: Enabling of monitor mode on user-specified network interface.
 2. **Network Enumeration**: Enumerate local wireless networks in order to find a network worth impersonating.
@@ -18,7 +20,7 @@ This tool allows a user to gain remote code execution with root priviledges thro
 
 Below is a video demonstration showing both the attacker and victim's perspective:
 <p align="center">
-    <embed src="./demo.mp4" />
+    <img src="./demo.mp4" />
 </p>
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
