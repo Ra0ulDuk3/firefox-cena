@@ -18,17 +18,15 @@ Firefox Cena allows the attacker to automatically carry out the following steps:
 7. **Payload Installation**: Upon execution of update script by client, installs TTS application and image viewer as well as minutely crontab which harasses client by running TTS in background and displaying an excessive amount of images of john cena in addition to a monero CPU mining client that deposits mining rewards into the attackers wallet.
 
 
+### Demonstration
+
 
 https://user-images.githubusercontent.com/50286871/144755982-0b096440-8e46-4398-bdd1-c69643dade5a.mp4
 
 
-Below is a video demonstration showing both the attacker and victim's perspective:
-
-![video](./demo.mp4)
-
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
 
-#### Interface Initialization
+### Interface Initialization
 
 Firefox Cena takes a single command line argument which dictates the network interface to be used for the procedure. 
 
@@ -40,7 +38,7 @@ In order to allow execution of the evil twin attack and direct all of the victim
 
 ![mon-mode](./assets/mon_mode.png)
 
-#### Network Enumeration
+### Network Enumeration
 The second phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds. 
 
 ![collect-data](./assets/collect_data.png)
@@ -50,7 +48,7 @@ The user is then presented with a number of options in descending order w.r.t th
 ![enumeration](./assets/enumeration.png)
 
 
-#### Network Spoofing
+### Network Spoofing
 Once a user has chosen the network that they would like to clone, FC clones the network using airbase-ng. By default, the network is cloned on channel 1 with the interface provided by the user. This is important to note because unless the user has two network interfaces, they will become disconnected from the internet as their interface will be too busy acting as an access point to provide internet access. 
 
 ![clone-network](./assets/clone_network.png)
@@ -61,7 +59,7 @@ After cloning the network, FC also allocates an IP address for the interface alo
 
 The ip address allocated for the access point is 192.168.0.100/24, which is important to note as this is the ip we will need to be sending our dns requests to since the same machine will also host the dns server.
 
-#### Traffic Redirection
+### Traffic Redirection
 Since FC controls the DHCP server and can tell clients where the DNS server is, FC includes a configuration file that tells dhcpd to point to our local interface as the domain name server. 
 
 ![dhcp-config](./assets/dhcp_config.png)
@@ -70,7 +68,7 @@ Immediately after launching dhcpd, FC spins up an instance of dnschef that liste
 
 ![launch-dns](./assets/launch_dns.png)
 
-#### Phishing
+### Phishing
 In order to execute code at root level on the victim machine, FC spins up an apache2 server with a cloned and modified firefox error page. 
 
 ![launch evil server](./assets/launch-server.png)
@@ -84,7 +82,7 @@ After pressing the update button, the user is directed to another cloned and mod
 ![firefox install](./assets/update_instructions.png)
 
 
-#### Deauthentication
+### Deauthentication
 In order to ensure that clients actually connect to our rogue access point, FC uses aireplay-ng, a wireless packet injector tool to send deauthentication packets to clients of the legitimate access point.
 
 ![deauth](./assets/deauth.png)
@@ -92,7 +90,7 @@ In order to ensure that clients actually connect to our rogue access point, FC u
 If a client is in closer proximity to or has a better signal from our rogue access point, they should automatically connect to it instead of connecting to the legitimate access point, providing us with victims to continue executing our attack on. If this is not the case, it is still possible for victims to connect to our network, though it would require the victim to manually select our network (which shouldn't be too much to ask since our rogue AP has the same essid).
 
 
-#### Payload Installation
+### Payload Installation
 The payload takes the form of a bash script. There are four main objectives of the payload; install dependencies, hide assets, establish cronjobs, and deploy the crypto-currency miner. 
 
 1. Dependency Installation:
@@ -116,7 +114,7 @@ The final objective of the payload is to deploy the monero miner. I chose this c
 ![deploy miner](./assets/deploy_miner.png)
 
 
-### Tools Table
+## Dependencies
 - airmon-ng: Used for enabling monitor mode on a Network Interface Card.
 - airodump-ng: Used for performing wireless packet captures.
 - airbase-ng: Used for creating the rogue acess point using the monitor mode NIC.
@@ -130,7 +128,7 @@ The final objective of the payload is to deploy the monero miner. I chose this c
 - cron: Used to schedule the minutely audiovisual harrasment of the user with the 2 preceeding tools.
 - xmrig: Used to mine monero using the victims machine.
 
-### Future Improvements 
+## Future Improvements 
 The first future improvement that is most pressing in my opinion is https support. I already have all of the code drafted, and will just need to conduct testing once acquiring a new NIC.
 
 The second improvement is in response to our second issue, the lack of password that results in users being warned of security issue upon connecting to our rogue AP. I did a bit of research into captive portals and WPA2 hash cracking and I think it would be interesting to implement the option to detect use of captive portal in networks and employ either captive portals or WPA2 hash-cracking to provide the user with a more legitimate looking network.
