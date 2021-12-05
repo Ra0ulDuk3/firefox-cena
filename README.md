@@ -18,6 +18,10 @@ Firefox Cena allows the attacker to automatically carry out the following steps:
 7. **Payload Installation**: Upon execution of update script by client, installs TTS application and image viewer as well as minutely crontab which harasses client by running TTS in background and displaying an excessive amount of images of john cena in addition to a monero CPU mining client that deposits mining rewards into the attackers wallet.
 
 
+
+https://user-images.githubusercontent.com/50286871/144755982-0b096440-8e46-4398-bdd1-c69643dade5a.mp4
+
+
 Below is a video demonstration showing both the attacker and victim's perspective:
 
 ![video](./demo.mp4)
