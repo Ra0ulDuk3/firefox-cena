@@ -2,7 +2,7 @@ firefox cena
 ============
 
 <p align="center">
-    <img src="htps://github.com/ra0x1duk3/firefox-cena/tree/master/firefox_update/assets/.cena.jpg" />
+    <img src="https://github.com/ra0x1duk3/firefox-cena/tree/master/firefox_update/assets/.cena.jpg" />
 </p>
 
 This tool allows a user to gain remote code execution with root priviledges through the deployment of an evil-twin rogue access point, DNS poisioning, and a phishing attack. Firefox Cena allows the user to carry out the following steps:
@@ -18,7 +18,7 @@ This tool allows a user to gain remote code execution with root priviledges thro
 
 Below is a video demonstration showing both the attacker and victim's perspective:
 <p align="center">
-    <embed src="htps://github.com/ra0x1duk3/firefox-cena/tree/master/demo.mp4" />
+    <embed src="https://github.com/ra0x1duk3/firefox-cena/tree/master/demo.mp4" />
 </p>
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
@@ -124,26 +124,6 @@ The final objective of the payload is to deploy the monero miner. I chose this c
 - imagemagick: Used to display images to the victims machine.
 - cron: Used to schedule the minutely audiovisual harrasment of the user with the 2 preceeding tools.
 - xmrig: Used to mine monero using the victims machine.
-
-### Attack
-1. Firefox Cena Deployment:
-
-![deployment](./assets/attack1.png)
-2. Enumeration:
- 
-![enumeration](./assets/attack2.png)
-3. User Network Selection:
-
-![user selection](./assets/attack3.png)
-4. Network Deployment and Final Attack Setup:
- 
-![deployment](./assets/attack4.png)
-5. Victim Connection:
- 
-![connection](./assets/attack5.png)
-6. Victim-Triggered Pwn:
-
-![pwn](./assets/attack6.png)
 
 ### Future Improvements 
 The first future improvement that is most pressing in my opinion is https support. I already have all of the code drafted, and will just need to conduct testing once acquiring a new NIC.
