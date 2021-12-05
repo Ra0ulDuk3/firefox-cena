@@ -1,7 +1,9 @@
 firefox cena
 ============
 
-![cena](./firefox_update/assets/.cena.jpg)
+<p align="center">
+    <img src="https://github.com/ra0x1duk3/firefox-cena/firefox_update/assets/.cena.jpg" />
+</p>
 
 This tool allows a user to gain remote code execution with root priviledges through the deployment of an evil-twin rogue access point, DNS poisioning, and a phishing attack. Firefox Cena allows the user to carry out the following steps:
 
