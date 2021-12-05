@@ -1,7 +1,7 @@
 firefox cena
 ============
 
-[cena](./firefox_update/assets/.cena.jpg)
+![cena](./firefox_update/assets/.cena.jpg)
 
 This tool allows a user to gain remote code execution with root priviledges through the deployment of an evil-twin rogue access point, DNS poisioning, and a phishing attack. Firefox Cena allows the user to carry out the following steps:
 
@@ -15,7 +15,7 @@ This tool allows a user to gain remote code execution with root priviledges thro
 
 
 Below is a video demonstration showing both the attacker and victim's perspective:
-[demonstration](./demo.mp4)
+![demonstration](./demo.mp4)
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
 
