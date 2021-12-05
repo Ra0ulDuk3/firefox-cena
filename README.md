@@ -18,7 +18,7 @@ This tool allows a user to gain remote code execution with root priviledges thro
 
 Below is a video demonstration showing both the attacker and victim's perspective:
 <p align="center">
-    <embed src="https://github.com/ra0x1duk3/firefox-cena/tree/master/demo.mp4" />
+    <embed src="./demo.mp4" />
 </p>
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
