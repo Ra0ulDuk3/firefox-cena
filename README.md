@@ -19,9 +19,8 @@ Firefox Cena allows the attacker to automatically carry out the following steps:
 
 
 Below is a video demonstration showing both the attacker and victim's perspective:
-<p align="center">
-    <img src="./demo.mp4" />
-</p>
+
+![video](./demo.mp4)
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
 
