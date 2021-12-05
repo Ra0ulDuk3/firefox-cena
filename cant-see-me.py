@@ -489,7 +489,7 @@ def main():
     # present user with option of network to clone and allow for them to decide
     target_network = user_network_decision(network_data)
     # create the evil twin
-    net_clone_proc = clone_network(clone)
+    net_clone_proc = clone_network(target_network)
     
     # launch evil web server
     launch_evil_server()
