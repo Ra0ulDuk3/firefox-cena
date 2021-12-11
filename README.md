@@ -18,7 +18,7 @@ Firefox Cena allows the attacker to automatically carry out the following steps:
 7. **Payload Installation**: Upon execution of update script by client, installs TTS application and image viewer as well as minutely crontab which harasses client by running TTS in background and displaying an excessive amount of images of john cena in addition to a monero CPU mining client that deposits mining rewards into the attackers wallet.
 
 
-### Demonstration
+## Demonstration
 
 
 https://user-images.githubusercontent.com/50286871/144755982-0b096440-8e46-4398-bdd1-c69643dade5a.mp4
@@ -26,8 +26,7 @@ https://user-images.githubusercontent.com/50286871/144755982-0b096440-8e46-4398-
 
 A more formal report can be found [here](./report.pdf), and presentation slides can be found [here](./slides.pdf)
 
-### Interface Initialization
-
+## Usage
 Firefox Cena takes a single command line argument which dictates the network interface to be used for the procedure. 
 
 `python3 cant-see-me.py <network-interface>`
@@ -37,6 +36,7 @@ Firefox Cena takes a single command line argument which dictates the network int
 In order to allow execution of the evil twin attack and direct all of the victims web traffic to our webserver, the first subroutine executed by FC is setting the network interface to Monitor mode using airmon-ng. This is done so that we can monitor local wireless packets and create a rogue access point.
 
 
+## Process Description
 ### Network Enumeration
 The second phase of Firefox Cena consists of identifying potential networks that can be spoofed. This is done by performing a packet capture on the locally accessible wireless networks using airodump to capture key information to present to the user, namely; BSSIDs, ESSIDs, and the number of data packets sent in the past 30 seconds. 
 
